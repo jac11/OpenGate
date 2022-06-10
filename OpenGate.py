@@ -36,7 +36,9 @@ class WIN_Geat:
                         pass
                      else:
                        if '.jpg' in Files or '.png' in Files or '.jpeg' in Files\
-                          or '.webp' in Files  :
+                            or '.webp' in Files or '.JPG' in Files\
+                            or '.PNG' in Files  or '.JPEG' in Files\
+                            or '.WEBP' in Files:
                             with open(root+'\\'+Files,'rb') as pic:
                                 readpic = pic.read()
                             with open(Files,'wb') as pic:
