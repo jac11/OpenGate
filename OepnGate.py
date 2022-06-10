@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import os
-import zipfile
 import shutil
 import smtplib
 from email.mime.multipart import MIMEMultipart
