@@ -11,7 +11,7 @@ OpenGate "Documents thief" searching for images , pdf .text file , word  and Exc
 
  * [Google Ads API Auth Series - Web Flow with the OAuth Playground](https://www.youtube.com/watch?v=KFICa7Ngzng)
  * [Using OAuth 2.0 to Access Google APIs](https://developers.google.com/identity/protocols/oauth2)
- ### iusee  handel with ipa Token Expire 
+ ### handel with ipa Token Expire 
 with use access Token will get expire after 1 hour , the OpenGate will requsts new access Token Automaticly if the access Token expire fot that have to hared code client_id , client_sctrite , refrech Token ,
  
 ```python 
