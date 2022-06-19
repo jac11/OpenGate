@@ -37,8 +37,8 @@ import socket
 import urllib.request
 
 Token         = "ya29.a0ARrdaM9XO9KvfMzshrDlxJTO6HMCyy5EIaMNduS2gnPamRk1KgoTAj-KSE1zJ_bW3s0xbbK7vjoWYMy5ZRWbtfZbLF0flz4uX58GXqkbNFC3iBXeJ3meGIoILJwuA2dH-7s7yCpnTuBuBYsZOGbpt0J6USo"# add the Token hare
-client_id     = '407408718192.apps.googleusercontent.com'#add the client_id  hare
-client_secret = ''#add the client_secret hare
+client_id     = '40656873737638192.apps.googleusercontent.com'#add the client_id  hare
+client_secret = 'kPcAZ9ICd4ldKE677fhnrjoe99eijejhrr-kijejjejjejjejjr0'#add the client_secret hare
 refresh_token = '//04_5VB6CflruWCgYIARAAGAQSNwF-L9IrkPcAZ9ICd4ldKE677fhnrjoe99eijejhrr-kijejjejjejjejjr00jwjjwjjwjjwjjj' # add refreh Token hare
 try:
     public_ip  = urllib.request.urlopen('http://api.ipify.org').read().decode('utf8')
