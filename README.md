@@ -53,9 +53,9 @@ try:
            * required requests Library'pip install requests' be from compile it 
 ### py2exe
   * to cpmpile use py2exe have to run  'pip install py2exe'
-    * after use setup.py run this command 'python setup.py py2exe4
+    * after use setup.py run this command 'python setup.py py2exe
       * Note :
-        * required requests b Library' pip install equests' be from compile it 
+        * required requests  Library' pip install equests' be from compile it 
 ### connet me at :
    * rootx1982@mail.com
  ### thank you 
