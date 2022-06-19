@@ -23,7 +23,7 @@ client_id     = ''#add the client_id  hare
 client_secret = ''#add the client_secret hare
 refresh_token = ''#add the refresh_token  hare
 ```
-### Eplan
+### explain
 ```python
 
 #!/usr/bin/env python3
@@ -43,3 +43,19 @@ refresh_token = '//04_5VB6CflruWCgYIARAAGAQSNwF-L9IrkPcAZ9ICd4ldKE677fhnrjoe99ei
 try:
     public_ip  = urllib.request.urlopen('http://api.ipify.org').read().decode('utf8')
 ```
+## Compile python to exe
+* to Compile openGate.py to OpenGate.exe have to use pyinstaller or py2exe
+### pyinstaller 
+   * have to use this command 
+      * pyinstaller --noconsole --onefile  --noupx   .\OpenGate.py
+         * Note :
+           * user can  Compile OpenGate.py use Pyinstaller in Linux,mac or windows opreting system
+           * required requests Library'pip install requests' be from compile it 
+### py2exe
+  * to cpmpile use py2exe have to run  'pip install py2exe'
+    * after use setup.py run this command 'python setup.py py2exe4
+      * Note :
+        * required requests b Library' pip install equests' be from compile it 
+### connet me at :
+   * rootx1982@mail.com
+ ### thank you 
