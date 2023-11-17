@@ -57,5 +57,5 @@ try:
       * Note :
         * required requests  Library' pip install equests' be from compile it 
 ### connet me at :
-   * rootx1982@mail.com
+   * jac11devel@gmail.com
  ### thank you 
