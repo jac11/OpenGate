@@ -11,10 +11,10 @@ import socket
 import urllib.request
 import re
 import time
-Token         = "ya29.a0AfB_byA2U2LL3Zif7xK7Zgn6xmpjI8iWmmK-QL60AOER3ObTYi8pkixxH_cUfVOF1-qyMqFVBWLsn5BybYdvtHyEkY4ZAjSozc36sxhUG4fxZR2AGRIrZdCZcu6IEDf-BkRKzeSbjrXeoQdeVS8sOekzN_YJCOudX00aaCgYKAbMSARISFQHGX2MiOhX9rCN0GUvnCnZBXJC--w0171"# add the Token hare
-client_id     = '153940682833-i5cc5974mijkihpcpuqdt6p3utga7p5h.apps.googleusercontent.com'#add the client_id  hare
-client_secret = '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'#add the client_secret hare
-refresh_token = '1//04pd74XE2WKDJCgYIARAAGAQSNwF-L9IrwQrHPaCwtoDQ7AEPxpIiZdX-OVoI1N7MDbVtwgqE7jUJgPo9V-smAp840dpyNzRqxSY'#add the refresh_token  hare  
+Token         = ""# add the Token hare
+client_id     = ''#add the client_id  hare
+client_secret = ''#add the client_secret hare
+refresh_token = ''#add the refresh_token  hare  
 Part_name = 0 
 with open(os.environ['TEMP']+'\\FMFData.tmp','a'):
      pass
