@@ -86,11 +86,11 @@ class WIN_Geat:
                       break 
         Conut_list  = []
         if Part_name not in Conut_list:
-          Conut_list.append(Part_name)
+           Conut_list.append(Part_name)
         if count == 0:
-            self.Part_name = Part_name
-            self.Cloue_Store()
-            self.remove_files()
+           self.Part_name = Part_name
+           self.Cloue_Store()
+           self.remove_files()
         else:                   
             if os.path.exists( os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1])+'.zip') :
                 
