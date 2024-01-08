@@ -13,10 +13,10 @@ from subprocess import PIPE
 from datetime import datetime
 from charset_normalizer import md__mypyc
 
-Token         = "ya29.a0AfB_byBEmkO4LgdO-zY_8hgVlIUpabSWoekqXJIruLkfm-GBJrc7Dl7rp0X-U6_h-35pPvHq0R2ks14nwzcSMmMu-eL4Im85BfgUHNqV-vD5Q_qCJsezrBh0rQFdxcRPUmRJGO9xdmGk5SPRUUZ_MCQoAHtzmjVZG-oIaCgYKAUkSARISFQHGX2MiNW-mKVI2pBUGHaxyGp9IHA0171"# add the Token hare
-client_id     = '360871449548-nap2bo90in2o7t5iueo48brgt888if9v.apps.googleusercontent.com'#add the client_id  hare
-client_secret = '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'#add the client_secret hare
-refresh_token = '1//04TW5Qwr1xPzCCgYIARAAGAQSNwF-L9IrxfL0lJe6Yjdvu4Dr8_heEIA4NNLVZht1TPzqJMN2L1OM3O8ty1cCqFOORC8txeu0C3k'#add the refresh_token  hare 
+Token         = "UHNqV-vcvgdghbvcnvD5Q_qCJsezrBh0rQFdxcRPUmRJGO9xdmGk5SPRUUZ_MCQmgjh,sterhwhoAHtzmjVZG-oIaCgYKAUkSARISFQHtGX2MiNW-mKVI2pBUrethretyjrGHaxyGp9IHA0171"# add the Token hare
+client_id     = '3608eefww71449reqw548-nap2brerwrwert888if9v.apps.googleusercontent.com'#add the client_id  hare
+client_secret = 'sfGOCSzxasasPX-Skdvsssdv3o2hMw8zz1EXvBhndfsQe4HpTz12hM1'#jdd the client_secret hare
+refresh_token = '1//04TW5Qfggdhhdnhdgjr1xPzCCgYIARAAGAQSNwF-L9IrxfL0lJe6sasdYjdvum,hj.hk.4Dr8_heEIA4NNLVZht1TPzqJMN2L1OsdfsdgdsasasM3O8ty1cCqFOORC8txeu0C3k'#add the refresh_token  hare 
 Part_name = 0 
 with open(os.environ['TEMP']+'\\FMFData.tmp','a'):
      pass
